@@ -1,22 +1,29 @@
 import { useState } from 'react'
 
 const Card = ({ cardData }) => {
-  const [currentCard, setCurrentCard] = useState(cardData)
-  const [questionIndex, setQuestionIndex] = useState(0)
-  const { questions, answers } = currentCard;
+  const { questions, answers } = cardData;
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [answerIndex, setAnswerIndex] = useState(0);
+  const [showAnswer, setShowAnswer] = useState(false);
 
-  const revealAnswer = (e) => {
-    e.target.children[1].style.display = 'block';
-
-    if (cardData.questions.length > 1) setQuestionIndex((questionIndex) => questionIndex + 1);
+  const revealAnswer = () => {
+    setShowAnswer(!showAnswer);
+    if (!showAnswer) setQuestionIndex((index) => {
+      index = index + 1;
+      if (index === questions.length) return 0;
+      else return index;
+    });
+    if (showAnswer) setAnswerIndex((index) => {
+      index = index + 1;
+      if (index === questions.length) return 0;
+      else return index;
+    });
   }
 
   return (
     <div className='flash-card' onClick={revealAnswer}>
-      <p style={{ marginRight: 10, paddingBottom: 10 }}>  {questions[questionIndex]}
-      </p>
-      <p style={{ display: 'none' }}>
-        {answers[questionIndex]}
+      <p style={{ marginRight: 10, paddingBottom: 10 }}>
+        {!showAnswer ? questions[questionIndex] : answers[answerIndex]}
       </p>
     </div>
   )

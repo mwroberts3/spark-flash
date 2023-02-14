@@ -5,14 +5,39 @@
 }
 
 body {
+  margin: 0 auto;
+  width: 1200px;
+  height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.deck-face {
+  width: 420px;
+  height: 160px;
+  margin: 10px 0;
+  border: 2px dashed #555;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  text-align: center;
 }
 
 .flash-card {
-  width: 300px;
+  width: 420px;
   height: 160px;
   margin-left: 20px;
   margin-bottom: 10px;
-  border: 2px solid #000;
+  border: 2px dashed #555;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
 }
