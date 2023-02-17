@@ -1,10 +1,11 @@
-import Card from "./Card"
+const Deck = ({ deckData, setSelectedDeck }) => {
+  const selectAndShuffleDeck = () => {
+    setSelectedDeck(deckData);
+  }
 
-const Deck = ({ deckData }) => {
   return (
-    <div className="deck-face">
+    <div className="deck-face" onClick={selectAndShuffleDeck}>
       {deckData.name}
-      {/* {deckData.cards.map((card, i) => <Card key={i} cardData={card} />)} */}
     </div>
   )
 }

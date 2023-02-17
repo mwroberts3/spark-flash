@@ -1,16 +1,29 @@
 import './global.css';
 import { useState } from 'react';
 import Deck from './components/Deck';
+import Card from './components/Card';
 import { decks } from './data';
 
 function App() {
-  const [loadedDecks, setLoadedDecks] = useState(decks);
+  const loadedDecks = decks;
+  const [selectedDeck, setSelectedDeck] = useState(null);
+  const [cardIndex, setCardIndex] = useState(0);
 
   console.log(loadedDecks);
+  console.log(selectedDeck);
 
   return (
     <div className="App">
-      {loadedDecks.map((deck, i) => <Deck key={i} deckData={deck} />)}
+      {
+        !selectedDeck ?
+          loadedDecks.map((deck, i) => {
+            return <Deck key={i} deckData={deck} setSelectedDeck={setSelectedDeck} />
+          })
+          :
+          <div className='card-table'>
+            <Card cardData={selectedDeck.cards[cardIndex]} setCardIndex={setCardIndex} />
+          </div>
+      }
     </div>
   );
 }
