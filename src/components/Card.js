@@ -7,13 +7,14 @@ const Card = ({ cardData, setCardIndex }) => {
   const [showAnswer, setShowAnswer] = useState(false);
 
   const revealAnswer = () => {
-    setShowAnswer(!showAnswer);
     if (!showAnswer) setQuestionIndex((index) => {
+      setShowAnswer(true);
       index = index + 1;
       if (index === questions.length) return 0;
       else return index;
     });
     if (showAnswer) setAnswerIndex((index) => {
+      setShowAnswer(false);
       index = index + 1;
       if (index === questions.length) return 'answered';
       else return index;
@@ -31,10 +32,10 @@ const Card = ({ cardData, setCardIndex }) => {
   }
 
   return (
-    <div className='flash-card' onClick={revealAnswer}>
+    <div className='flash-card'>
       {
         answerIndex !== 'answered' ?
-          <p style={{ marginRight: 10, paddingBottom: 10 }}>
+          <p style={{ marginRight: 10, paddingBottom: 10 }} onClick={revealAnswer}>
             {!showAnswer ? questions[questionIndex] : answers[answerIndex]}
           </p> :
           <div className='question-answered-prompt' onClick={logAnswer}>
