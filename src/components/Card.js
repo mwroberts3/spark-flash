@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Card = ({ cardData, setCardIndex }) => {
+const Card = ({ cardData, setCardIndex, rightWrongAnswers, setRightWrongAnswers }) => {
   const { questions, answers } = cardData;
   const [questionIndex, setQuestionIndex] = useState(0);
   const [answerIndex, setAnswerIndex] = useState(0);
@@ -23,6 +23,18 @@ const Card = ({ cardData, setCardIndex }) => {
 
   const logAnswer = (e) => {
     console.log(e.target.textContent);
+    if (e.target.textContent === 'Right') {
+      setRightWrongAnswers((answers) => {
+        answers.right++;
+        return answers;
+      })
+    } else {
+      setRightWrongAnswers((answers) => {
+        answers.wrong++;
+        return answers;
+      })
+    }
+
     setShowAnswer(false);
     setAnswerIndex(0);
     setCardIndex((index) => {

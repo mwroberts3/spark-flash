@@ -1,16 +1,18 @@
 import './global.css';
 import { useState } from 'react';
+import { decks } from './data';
 import Deck from './components/Deck';
 import Card from './components/Card';
-import { decks } from './data';
+import LiveDeckStats from './components/LiveDeckStats';
 
 function App() {
   const loadedDecks = decks;
   const [selectedDeck, setSelectedDeck] = useState(null);
+  const [rightWrongAnswers, setRightWrongAnswers] = useState({ right: 0, wrong: 0 });
   const [cardIndex, setCardIndex] = useState(0);
 
-  console.log(loadedDecks);
-  console.log(selectedDeck);
+  // console.log(loadedDecks);
+  // console.log(selectedDeck);
 
   return (
     <div className="App">
@@ -21,7 +23,8 @@ function App() {
           })
           :
           <div className='card-table'>
-            <Card cardData={selectedDeck.cards[cardIndex]} setCardIndex={setCardIndex} />
+            <LiveDeckStats rightWrongAnswers={rightWrongAnswers} />
+            <Card cardData={selectedDeck.cards[cardIndex]} setCardIndex={setCardIndex} rightWrongAnswers={rightWrongAnswers} setRightWrongAnswers={setRightWrongAnswers} />
           </div>
       }
     </div>
